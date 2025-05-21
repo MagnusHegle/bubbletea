@@ -139,11 +139,26 @@ func mouseEvent(p coninput.ButtonState, e coninput.MouseEventRecord) MouseMsg {
 		Shift: e.ControlKeyState.Contains(coninput.SHIFT_PRESSED),
 	}
 	switch e.EventFlags {
-	case coninput.CLICK, coninput.DOUBLE_CLICK:
+	case coninput.CLICK:
 		ev.Button, ev.Action = mouseEventButton(p, e.ButtonState)
 		if ev.Action == MouseActionRelease {
 			ev.Type = MouseRelease
 		}
+		switch ev.Button {
+		case MouseButtonLeft:
+			ev.Type = MouseLeft
+		case MouseButtonMiddle:
+			ev.Type = MouseMiddle
+		case MouseButtonRight:
+			ev.Type = MouseRight
+		case MouseButtonBackward:
+			ev.Type = MouseBackward
+		case MouseButtonForward:
+			ev.Type = MouseForward
+		}
+	case coninput.DOUBLE_CLICK:
+		ev.Button, _ = mouseEventButton(p, e.ButtonState)
+		ev.Action = MouseActionPress
 		switch ev.Button {
 		case MouseButtonLeft:
 			ev.Type = MouseLeft
