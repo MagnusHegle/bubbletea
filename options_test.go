@@ -125,7 +125,7 @@ func TestOptions(t *testing.T) {
 				t.Errorf("expected startup options have %v, got %v", opt, p.startupOptions)
 			}
 			if p.inputType != ttyInput {
-				t.Errorf("expected input to be %v, got %v", opt, p.startupOptions)
+				t.Errorf("expected input type to be %v, got %v", ttyInput, p.inputType)
 			}
 		}
 	})
